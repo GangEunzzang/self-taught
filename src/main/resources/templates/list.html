@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    안녕하세요<br>
+    <a href="/register"> <button>등록</button> </a>
+
+    <table>
+        <tr>
+            <th>no</th>
+            <th>title</th>
+            <th>content</th>
+        </tr>
+        <tr th:each="crudDTO : ${list}">
+            <td>
+                <a th:href="@{/read(bno=${crudDTO.bno})}">
+                    [[${crudDTO.bno}]]
+                </a>
+            </td>
+            <td>[[${crudDTO.title}]]</td>
+            <td>[[${crudDTO.content}]]</td>
+        </tr>
+    </table>
+
+</body>
+</html>

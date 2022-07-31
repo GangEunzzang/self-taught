@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form method="post">
+번호 : <input type="text" name="bno" th:value="${dto.bno}"><br>
+제목 : <input type="text" name="title" th:value="${dto.title}" > <br><br>
+내용 : <textarea rows="10" name="content">[[${dto.content}]]</textarea><br>
+<input type="submit">
+</form>
+
+</body>
+</html>
