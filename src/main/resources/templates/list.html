@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -14,7 +18,7 @@
             <th>title</th>
             <th>content</th>
         </tr>
-        <tr th:each="crudDTO : ${list}">
+        <tr th:each="crudDTO : ${result.dtoList}">
             <td>
                 <a th:href="@{/read(bno=${crudDTO.bno})}">
                     [[${crudDTO.bno}]]
@@ -25,5 +29,29 @@
         </tr>
     </table>
 
+    <ul id="paging" class="pagination h-100 justify-content-center align-items-center">
+
+        <li class="page-item " th:if="${result.prev}">
+            <a class="page-link" th:href="@{/list(page= ${result.start -1},
+                    type=${pageRequestDTO.type} ,
+                    keyword = ${pageRequestDTO.keyword} ) }" tabindex="-1">이전</a>
+        </li>
+
+        <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.pageList}">
+            <a class="page-link" th:href="@{/list(page = ${page} ,
+                   type=${pageRequestDTO.type} ,
+                   keyword = ${pageRequestDTO.keyword}  )}">
+                [[${page}]]
+            </a>
+        </li>
+
+        <li class="page-item" th:if="${result.next}">
+            <a class="page-link" th:href="@{/list(page= ${result.end + 1} ,
+                    type=${pageRequestDTO.type} ,
+                    keyword = ${pageRequestDTO.keyword} )}">
+                다음
+            </a>
+        </li>
+    </ul>
 </body>
 </html>

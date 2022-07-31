@@ -22,4 +22,5 @@ public class CrudRepositoryTests {
             crudRepository.save(crud);
         });
     }
+
 }

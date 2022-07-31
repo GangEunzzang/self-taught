@@ -1,6 +1,7 @@
 package gang.study.crud.controller;
 
 import gang.study.crud.dto.CrudDTO;
+import gang.study.crud.dto.PageRequestDTO;
 import gang.study.crud.entity.Crud;
 import gang.study.crud.service.CrudService;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +22,10 @@ public class CrudController {
     private final CrudService crudService;
 
     @GetMapping("/list")
-    public void select(Model model) {
+    public void select(PageRequestDTO pageRequestDTO, Model model) {
         //서비스 호출
         //view페이지로 전달
+        model.addAttribute("result", crudService.getList(pageRequestDTO));
     }
 
     @GetMapping("/register")

@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -12,5 +15,35 @@
 
     <a th:href="@{/modify(bno=${dto.bno})}" class="btn btn-primary">수정</a>
     <a th:href="@{/delete(bno=${dto.bno})}" class="btn btn-primary">삭제</a>
+
+    <ul class="reply-list">
+
+    </ul>
 </body>
+
+<script th:inline="javascript">
+    $(document).ready(function (){
+        let bno = [[${dto.bno}]];
+
+        function getCrudReply(){
+            $.getJSON("/crud/" + bno, function (arr){
+                console.log(arr);
+                let str = "";
+
+                $.each(arr, function (idx, reply) {
+                    console.log(reply)
+
+                    str += '<li>';
+                    str += '<div>' + reply.content + '</div>';
+                    str += '</li>';
+                });
+                $(".reply-list").html(str);
+            });
+        };
+        getCrudReply();
+    });
+
+
+
+</script>
 </html>
