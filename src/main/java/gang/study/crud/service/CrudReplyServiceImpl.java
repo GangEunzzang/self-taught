@@ -1,5 +1,6 @@
 package gang.study.crud.service;
 
+import gang.study.crud.dto.CrudDTO;
 import gang.study.crud.dto.CrudReplyDTO;
 import gang.study.crud.entity.Crud;
 import gang.study.crud.entity.CrudReply;
@@ -26,4 +27,12 @@ public class CrudReplyServiceImpl implements CrudReplyService{
         return result.stream().map(crudReply ->
                 entityToDTO(crudReply)).collect(Collectors.toList());
     }
+
+    @Override
+    public Long register(CrudReplyDTO crudReplyDTO) {
+        CrudReply crudReply = dtoToEntity(crudReplyDTO);
+        crudReplyRepository.save(crudReply);
+        return crudReply.getRno();
+    }
+
 }

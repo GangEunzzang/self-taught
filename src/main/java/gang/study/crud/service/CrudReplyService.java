@@ -1,5 +1,6 @@
 package gang.study.crud.service;
 
+import gang.study.crud.dto.CrudDTO;
 import gang.study.crud.dto.CrudReplyDTO;
 import gang.study.crud.entity.Crud;
 import gang.study.crud.entity.CrudReply;
@@ -10,8 +11,9 @@ public interface CrudReplyService {
 
     List<CrudReplyDTO> getListOfCrud(Long bno);
 
+    Long register(CrudReplyDTO crudReplyDTO);
 
-    default CrudReply DTOtoEntity(CrudReplyDTO crudReplyDTO){
+    default CrudReply dtoToEntity(CrudReplyDTO crudReplyDTO){
         CrudReply crudReply = CrudReply.builder()
                 .rno(crudReplyDTO.getRno())
                 .content(crudReplyDTO.getContent())
