@@ -16,6 +16,12 @@
     <a th:href="@{/modify(bno=${dto.bno})}" class="btn btn-primary">수정</a>
     <a th:href="@{/delete(bno=${dto.bno})}" class="btn btn-primary">삭제</a>
 
+    <div id="comment-form">
+        <textarea  class="comment-content" name="content" rows="5", placeholder="댓글을 입력하세요."></textarea>
+    </div>
+    <button id="comment-btn" class="btn btn-success">등록</button>
+
+
     <ul class="reply-list">
 
     </ul>
@@ -23,9 +29,27 @@
 
 <script th:inline="javascript">
     $(document).ready(function (){
-        let bno = [[${dto.bno}]];
+        let bno = [[${dto.bno}]];  // 댓글 번호
+        let comment = $(".comment-content");  // 댓글 내용
 
-        function getCrudReply(){
+        $("#comment-btn").click(function (){  // 댓글 등록 버튼 클릭
+            let data = {crud: bno, content: comment.val()}  // 데이터 게시글번호, 댓글 내용 담는다.
+            console.log(data);
+            $.ajax({
+                url: '/crud/'+bno,
+                type: "POST",
+                data:JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                dataType: "text",
+                success: function (result) {
+                    getCrudReply()
+                    self.location.reload();
+                }
+            })
+        });
+
+
+        function getCrudReply(){  // 댓글 출력
             $.getJSON("/crud/" + bno, function (arr){
                 console.log(arr);
                 let str = "";

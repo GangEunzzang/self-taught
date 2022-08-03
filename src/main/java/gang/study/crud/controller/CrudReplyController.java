@@ -2,18 +2,17 @@ package gang.study.crud.controller;
 
 import gang.study.crud.dto.CrudDTO;
 import gang.study.crud.dto.CrudReplyDTO;
+import gang.study.crud.entity.CrudReply;
 import gang.study.crud.service.CrudReplyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
+import java.security.Principal;
 import java.util.List;
 
 @Log4j2
@@ -29,6 +28,12 @@ public class CrudReplyController {
         List<CrudReplyDTO> crudReplyDTOList = crudReplyService.getListOfCrud(bno);
 
         return new ResponseEntity<>(crudReplyDTOList, HttpStatus.OK);
+    }
+
+    @PostMapping("/crud/{bno}")
+    public ResponseEntity<Long> addCrudReply(@RequestBody CrudReplyDTO crudReplyDTO){
+        Long rno = crudReplyService.register(crudReplyDTO);
+        return new ResponseEntity<>(rno,HttpStatus.OK);
     }
 
 
