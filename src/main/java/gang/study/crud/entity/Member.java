@@ -12,6 +12,7 @@ import javax.persistence.*;
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
+@Builder
 public class Member {
 
     @Id
@@ -23,6 +24,13 @@ public class Member {
 
     @Enumerated(EnumType.STRING)
     private MemberRole memberRole;
+
+    public Member(String email, String password, String name, MemberRole role){
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.memberRole = role;
+    }
 
     public static Member createMember(MemberDTO memberDTO, PasswordEncoder passwordEncoder){
 

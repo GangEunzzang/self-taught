@@ -3,15 +3,18 @@ package gang.study.crud.controller;
 import gang.study.crud.dto.CrudDTO;
 import gang.study.crud.dto.PageRequestDTO;
 import gang.study.crud.entity.Crud;
+import gang.study.crud.security.details.MemberDetail;
 import gang.study.crud.service.CrudService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.awt.print.Pageable;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -22,7 +25,13 @@ public class CrudController {
     private final CrudService crudService;
 
     @GetMapping("/list")
-    public void select(PageRequestDTO pageRequestDTO, Model model) {
+    public void select(@AuthenticationPrincipal MemberDetail memberDetail, PageRequestDTO pageRequestDTO, Model model) {
+        if(memberDetail != null){
+            String id =  memberDetail.getUsername();
+             log.info("id는 "  + id);
+            model.addAttribute("email", id);
+        }
+
         //서비스 호출
         //view페이지로 전달
         model.addAttribute("result", crudService.getList(pageRequestDTO));
