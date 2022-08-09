@@ -9,6 +9,7 @@ import gang.study.crud.repository.CrudReplyRepository;
 import gang.study.crud.repository.CrudRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CrudServiceImpl implements CrudService {
 
+    private final ModelMapper modelMapper;
     private final CrudRepository crudRepository;
     private final CrudReplyRepository crudReplyRepository;
 //    @Override
@@ -48,7 +50,10 @@ public class CrudServiceImpl implements CrudService {
 
     @Override
     public Long register(CrudDTO dto) {
-        Crud crud = dtoToEntity(dto);
+//        Crud crud = dtoToEntity(dto);
+//        crudRepository.save(crud);
+//        return crud.getBno();
+        Crud crud = modelMapper.map(dto, Crud.class);
         crudRepository.save(crud);
         return crud.getBno();
     }
@@ -58,7 +63,7 @@ public class CrudServiceImpl implements CrudService {
         Crud crud = Crud.builder().bno(bno).build();
         Crud result = crudRepository.findByBno(bno);
         List<CrudReply> crudReplyList = crudReplyRepository.findByCrud(crud);
-
+        
         log.info("******************************");
         log.info("result 전" + result);
         log.info("reply 전" + crudReplyList);

@@ -1,16 +1,24 @@
 package gang.study.crud.repository;
 
+import com.querydsl.core.QueryFactory;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import gang.study.crud.entity.Crud;
 import gang.study.crud.entity.CrudReply;
+import gang.study.crud.entity.QCrud;
+import gang.study.crud.entity.QMember;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.lang.reflect.Member;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static gang.study.crud.entity.QCrud.*;
+import static gang.study.crud.entity.QMember.member;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 public class CrudReplyTests {
@@ -18,7 +26,8 @@ public class CrudReplyTests {
     @Autowired
     CrudReplyRepository crudReplyRepository;
 
-
+    @Autowired
+    JPAQueryFactory jpaQueryFactory;
     @Test
     public void insertCrudReply() {
         IntStream.rangeClosed(1,1000).forEach(i -> {
@@ -43,6 +52,25 @@ public class CrudReplyTests {
             System.out.println(crudReply.getContent());
         });
     }
+
+    @Test
+    public void startQuerydsl() {
+        Crud findMember = jpaQueryFactory
+                .select(crud)
+                .from(crud)
+                .where(crud.content.eq("11"))
+                .fetchOne();
+        assertThat(findMember.getContent()).isEqualTo("11");
+    }
+
+    @Test
+    public void search() {
+        jpaQueryFactory
+                .select(crud)
+                .where()
+    }
+
+
 //
 //    @Test
 //    public void test(){
