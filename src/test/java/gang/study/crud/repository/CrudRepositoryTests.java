@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.stream.IntStream;
 
 @SpringBootTest
-public class CrudRepositoryTests {
+public class    CrudRepositoryTests {
 
     @Autowired CrudRepository crudRepository;
 

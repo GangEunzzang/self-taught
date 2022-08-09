@@ -55,13 +55,15 @@ public class CrudServiceImpl implements CrudService {
 
     @Override
     public CrudDTO read(Long bno) {
+        Crud crud = Crud.builder().bno(bno).build();
         Crud result = crudRepository.findByBno(bno);
-        List<CrudReply> crudReplyList = crudReplyRepository.findByCrud(Crud.builder().bno(bno).build());
+        List<CrudReply> crudReplyList = crudReplyRepository.findByCrud(crud);
 
         log.info("******************************");
-        log.info("result" + result);
-        log.info("reply" + crudReplyList);
+        log.info("result 전" + result);
+        log.info("reply 전" + crudReplyList);
         log.info("******************************");
+        log.info(entitiesToDTO(result,crudReplyList));
 
         return entitiesToDTO(result,crudReplyList);
     }
@@ -76,10 +78,19 @@ public class CrudServiceImpl implements CrudService {
             crudRepository.save(crud);
         }
     }
-
-
     @Override
     public void delete(Long dto) {
         crudRepository.deleteById(dto);
     }
+
+
+//    public Board register(BoardDTO dto){
+//        log.info("변환 전 " + dto.getTitle() + " 변환 전" + dto.getContent());
+//        Board board = modelMapper.map(dto, Board.class);
+//        log.info("내용 " + board.getContent() + "제목" + board.getTitle());
+//        return boardRepository.save(board);
+//    }
+
+
+
 }

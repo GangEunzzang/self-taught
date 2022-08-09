@@ -59,6 +59,7 @@ public interface CrudService {
         }).collect(Collectors.toList());
 
         dto.setCrudReplyDTOList(crudReplyDTOList);
+
         return dto;
     }
 

@@ -1,6 +1,7 @@
 package gang.study.crud.entity;
 
 import lombok.*;
+import org.mapstruct.Mapper;
 
 import javax.persistence.*;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @ToString
 @Builder
 @Getter
+@Mapper
 public class Crud {
 
     @Id
