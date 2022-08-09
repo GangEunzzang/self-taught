@@ -4,6 +4,8 @@ import gang.study.crud.dto.CrudDTO;
 import gang.study.crud.dto.PageRequestDTO;
 import gang.study.crud.dto.PageResultDTO;
 import gang.study.crud.entity.Crud;
+import gang.study.crud.entity.CrudReply;
+import gang.study.crud.repository.CrudReplyRepository;
 import gang.study.crud.repository.CrudRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -24,7 +26,7 @@ import java.util.stream.Collectors;
 public class CrudServiceImpl implements CrudService {
 
     private final CrudRepository crudRepository;
-
+    private final CrudReplyRepository crudReplyRepository;
 //    @Override
 //    public List<CrudDTO> getList() {
 //        List<Crud> result = crudRepository.findAll();
@@ -53,14 +55,15 @@ public class CrudServiceImpl implements CrudService {
 
     @Override
     public CrudDTO read(Long bno) {
-        Optional<Crud> result = crudRepository.findById(bno);
+        Crud result = crudRepository.findByBno(bno);
+        List<CrudReply> crudReplyList = crudReplyRepository.findByCrud(Crud.builder().bno(bno).build());
 
-        if(result.isPresent()){
-            return entityToDTO(result.get());
-        }else{
-            return null;
-        }
+        log.info("******************************");
+        log.info("result" + result);
+        log.info("reply" + crudReplyList);
+        log.info("******************************");
 
+        return entitiesToDTO(result,crudReplyList);
     }
 
     @Override
