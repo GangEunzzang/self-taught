@@ -67,7 +67,7 @@ public class CrudReplyTests {
     public void search() {
         jpaQueryFactory
                 .select(crud)
-                .where()
+                .where();
     }
 
 

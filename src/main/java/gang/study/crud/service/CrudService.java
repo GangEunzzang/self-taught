@@ -7,6 +7,7 @@ import gang.study.crud.dto.PageRequestDTO;
 import gang.study.crud.dto.PageResultDTO;
 import gang.study.crud.entity.Crud;
 import gang.study.crud.entity.CrudReply;
+import gang.study.crud.querydsl.CrudSearchCondition;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ import java.util.stream.Collectors;
 
 public interface CrudService {
 
+
+//    List<CrudDTO> getListQuerydsl(CrudSearchCondition condition);
     //목록보기
     PageResultDTO<CrudDTO, Crud> getList(PageRequestDTO requestDTO);
 

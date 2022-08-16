@@ -3,6 +3,8 @@ package gang.study.crud.controller;
 import gang.study.crud.dto.CrudDTO;
 import gang.study.crud.dto.PageRequestDTO;
 import gang.study.crud.entity.Crud;
+import gang.study.crud.querydsl.CrudQuerydslRepository;
+import gang.study.crud.querydsl.CrudSearchCondition;
 import gang.study.crud.security.details.MemberDetail;
 import gang.study.crud.service.CrudService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +25,12 @@ import java.util.List;
 public class CrudController {
 
     private final CrudService crudService;
+    private final CrudQuerydslRepository crudQuerydslRepository;
 
+    @GetMapping("/query")
+    public List<CrudDTO> search(CrudSearchCondition condition){
+        return crudQuerydslRepository.search(condition);
+    }
     @GetMapping("/list")
     public void select(@AuthenticationPrincipal MemberDetail memberDetail, PageRequestDTO pageRequestDTO, Model model) {
         if(memberDetail != null){
@@ -46,7 +53,6 @@ public class CrudController {
         log.info("등록 로그 -------------------");
         log.info("CrudDTO" + dto);
         crudService.register(dto);
-
         return "redirect:/list";
     }
 

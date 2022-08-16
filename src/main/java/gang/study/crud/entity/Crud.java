@@ -11,7 +11,6 @@ import javax.persistence.*;
 @ToString
 @Builder
 @Getter
-@Mapper
 public class Crud {
 
     @Id
