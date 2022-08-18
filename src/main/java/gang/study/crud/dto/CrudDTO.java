@@ -3,6 +3,7 @@ package gang.study.crud.dto;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +14,11 @@ import java.util.List;
 @NoArgsConstructor
 public class CrudDTO {
     private Long bno;
+    @NotBlank(message = "제목을 입력해주세요.")
     private String title;
+    @NotBlank(message = "내용을 입력해주세요.")
     private String content;
+
     private String writer;
 
     private List<CrudReplyDTO> crudReplyDTOList = new ArrayList<>();

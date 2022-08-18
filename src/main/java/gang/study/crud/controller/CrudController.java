@@ -8,12 +8,16 @@ import gang.study.crud.security.details.MemberDetail;
 import gang.study.crud.service.CrudService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.awt.print.Pageable;
 import java.security.Principal;
 import java.util.List;
@@ -47,7 +51,13 @@ public class CrudController {
     }
 
     @PostMapping("/register")
-    public String register(CrudDTO dto){
+    public String  register(@Valid CrudDTO dto, BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()) {
+            log.info("ㅁㅁㅁ로로고로고" + bindingResult);
+//            model.addAttribute("errors", bindingResult.getAllErrors());
+
+             return "/register";
+        }
         log.info("등록 로그 -------------------");
         log.info("CrudDTO" + dto);
         crudService.register(dto);

@@ -6,6 +6,8 @@ import gang.study.crud.dto.PageResultDTO;
 import gang.study.crud.entity.Crud;
 import gang.study.crud.entity.CrudReply;
 
+import gang.study.crud.exception.ErrorCode;
+import gang.study.crud.exception.board.BoardException;
 import gang.study.crud.repository.CrudReplyRepository;
 import gang.study.crud.repository.CrudRepository;
 import lombok.RequiredArgsConstructor;
@@ -61,14 +63,20 @@ public class CrudServiceImpl implements CrudService {
     @Override
     public Long register(CrudDTO dto) {
         Crud crud = dtoToEntity(dto);
+
         crudRepository.save(crud);
         return crud.getBno();
     }
 
     @Override
     public CrudDTO read(Long bno) {
+        if(crudRepository.findById(bno).isEmpty()) {
+            throw new BoardException("게시물이 없습니다",ErrorCode.NOT_FOUND);
+        };
+
         Crud crud = Crud.builder().bno(bno).build();
         Crud result = crudRepository.findByBno(bno);
+
         List<CrudReply> crudReplyList = crudReplyRepository.findByCrud(crud);
         
         log.info("******************************");
@@ -92,6 +100,9 @@ public class CrudServiceImpl implements CrudService {
     }
     @Override
     public void delete(Long dto) {
+        if (crudRepository.findById(dto).isEmpty()) {
+            throw new BoardException("게시물이 없습니다.", ErrorCode.INTER_SERVER_ERROR);
+        };
         crudRepository.deleteById(dto);
     }
 

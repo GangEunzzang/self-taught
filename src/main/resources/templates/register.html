@@ -6,7 +6,9 @@
 </head>
 <body>
 <form method="post">
-    제목 : <input type="text" name="title"> <br><br>
+    제목 : <input type="text" name="title"> <br>
+    <span th:errors="*{title}" th:class="field-error"></span>
+    <br>
     내용 : <textarea rows="10" name="content"></textarea><br>
     <button type="submit" >등록</button>
 </form>
