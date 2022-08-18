@@ -3,13 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<form method="post">
-    제목 : <input type="text" name="title"> <br>
-    <span th:errors="*{title}" th:class="field-error"></span>
-    <br>
-    내용 : <textarea rows="10" name="content"></textarea><br>
+<form method="post" th:object="${crudDTO}">
+    <label for="title"/>
+    <input type="text" id="title" th:field="*{title}" th:errorclass="title">
+    <div th:errors="*{title}" class="field-error"></div>
+    <br/>
+
+    <label for="content"/>
+    <input type="text" id="content" th:field="*{content}" th:errorclass="content">
+    <div th:errors="*{content}" class="field-error"></div>
+    <br/>
+
+<!--    <div class="input-group">-->
+<!--        <div class="input-group-prepend">-->
+<!--            <span class="input-group-text">제목</span>-->
+<!--        </div>-->
+<!--        <input type="text" th:field="*{title}" class="form-control" placeholder="제목을 입력해주세요">-->
+<!--    </div>-->
+<!--    <p th:if="${#fields.hasErrors('title')}" th:erros="*{title}" class="fieldError">제목을 입력해주세요</p>-->
     <button type="submit" >등록</button>
 </form>
 </body>

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -47,20 +48,18 @@ public class CrudController {
     }
 
     @GetMapping("/register")
-    public void register(){
+    public void register(Model model){
+        model.addAttribute("crudDTO", new CrudDTO());
     }
 
     @PostMapping("/register")
-    public String  register(@Valid CrudDTO dto, BindingResult bindingResult, Model model){
+    public String register(@Valid @ModelAttribute CrudDTO crudDTO, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()) {
-            log.info("ㅁㅁㅁ로로고로고" + bindingResult);
-//            model.addAttribute("errors", bindingResult.getAllErrors());
-
              return "/register";
         }
         log.info("등록 로그 -------------------");
-        log.info("CrudDTO" + dto);
-        crudService.register(dto);
+        log.info("CrudDTO" + crudDTO);
+        crudService.register(crudDTO);
         return "redirect:/list";
     }
 
