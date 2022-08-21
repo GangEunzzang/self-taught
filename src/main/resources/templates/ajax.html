@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>jQuery 연습하고 가기!</title>
+    <!-- jQuery를 import 합니다 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <style type="text/css">
+        div.question-box {
+            margin: 10px 0 20px 0;
+        }
+
+        table {
+            border: 1px solid;
+            border-collapse: collapse;
+        }
+
+        td,
+        th {
+            padding: 10px;
+            border: 1px solid;
+        }
+    </style>
+
+    <script>
+        function q1() {
+            let str = "";
+
+            $("#names-q1").empty();
+
+            $.ajax({
+                type: "GET",
+                url: "http://spartacodingclub.shop/sparta_api/seoulbike",
+                data: {},
+                success: function (response) {
+                    let ss = response.getStationList.row
+
+                    console.log("처음" , ss);
+
+                    // 배열.reduce((누적값, 현잿값, 인덱스, 요소) => { return 결과 }, 초깃값);
+                    const map = ss.reduce((result, item) => {
+                        const {rackTotCnt} = item; // 현재값 .. ?
+
+                        if (result[rackTotCnt] === undefined) {  // 만약 현재값이 없으면 ?
+                            result[rackTotCnt] = [];  // result = 비워둔다.
+                        }
+                        result[rackTotCnt].push(item);  // 아니면 현재값을 배열안에 저장한다. 이걸 반복?
+
+                        return result;
+
+                    }, {});
+
+                    console.log("찍히나 ??", map );
+
+                    $.each(map, function (index, item) {
+
+                        str += '<tr>';
+
+                        $.each(item, function (index, item) {
+                            str += '<td>' + item.stationName + '</td>';
+                        })
+                        str += '<td>' + item[index].rackTotCnt + '</td>';
+                        // str += '<td>' + item[index].parkingBikeTotCnt + '</td>';
+                        str += '</tr>';
+                        $("#names-q1").html(str);
+                    })
+
+
+                    console.log("분류", typeof map, map);
+                    // console.log("aa?", map[stationName]);
+
+                    console.log("제거 후 " , ss);
+
+                    $.each() //메서드의 첫번째 매겨변수로 위에서 선언한 배열은 전달
+                    $.each(ss, function (index, item) {
+                        // 두 번째 매개변수로는 콜백함수인데 콜백함수의 매개변수 중
+                        // 첫 번째 index는 배열의 인덱스 또는 객체의 키를 의미하고
+                        // 두 번째 매개 변수 item은 해당 인덱스나 키가 가진 값을 의미합니다.
+
+                        str += '<tr>';
+                        str += '<td>' + item.stationName + '</td>';
+                        str += '<td>' + item.rackTotCnt +'</td>';
+                        str += '<td>' + item.parkingBikeTotCnt + '</td>';
+                        str += '</tr>';
+                        $("#names-q1").html(str);
+                    })
+                },
+            });
+
+
+
+
+
+            const data = [
+                {'parkingBikeTotCnt': 13, 'rackTotCnt': 20, 'shared': 7, 'stationName': '301. 경복궁역 7번출구 앞'},
+                {'parkingBikeTotCnt': 3, 'rackTotCnt': 22, 'shared': 19, 'stationName': '302. 경복궁역 4번출구 뒤'},
+                {'parkingBikeTotCnt': 7, 'rackTotCnt': 24, 'shared': 17, 'stationName': '303. 광화문역 1번출구 앞'},
+                {'parkingBikeTotCnt': 21, 'rackTotCnt': 42, 'shared': 21, 'stationName': '304. 광화문역 2번출구 앞'},
+                {'parkingBikeTotCnt': 8, 'rackTotCnt': 48, 'shared': 40, 'stationName': '305. 종로구청 옆'},
+                {'parkingBikeTotCnt': 29, 'rackTotCnt': 31, 'shared': 2, 'stationName': '306. 광화문역 7번출구 앞'},
+                {'parkingBikeTotCnt': 16, 'rackTotCnt': 31, 'shared': 15, 'stationName': '307. 서울역사박물관 앞'},
+                {'parkingBikeTotCnt': 21, 'rackTotCnt': 21, 'shared': 0, 'stationName': '308. 광화문 S타워 앞'},
+                {'parkingBikeTotCnt': 4, 'rackTotCnt': 47, 'shared': 43, 'stationName': '309. 광화문역 6번출구 옆'},
+                {'parkingBikeTotCnt': 6, 'rackTotCnt': 34, 'shared': 28, 'stationName': '314. 국립현대미술관'},
+                {'parkingBikeTotCnt': 22, 'rackTotCnt': 30, 'shared': 8, 'stationName': '316. 종각역 1번출구 앞'},
+                {'parkingBikeTotCnt': 22, 'rackTotCnt': 29, 'shared': 7, 'stationName': '326. 안국역 5번출구 앞'},
+                {'parkingBikeTotCnt': 31, 'rackTotCnt': 37, 'shared': 6, 'stationName': '327. 낙원상가 옆'},
+                {'parkingBikeTotCnt': 38, 'rackTotCnt': 45, 'shared': 7, 'stationName': '328. 탑골공원 앞'},
+                {'parkingBikeTotCnt': 22, 'rackTotCnt': 48, 'shared': 26, 'stationName': '329. 청계2가 사거리 옆'},
+                {'parkingBikeTotCnt': 34, 'rackTotCnt': 44, 'shared': 10, 'stationName': '334. 종로3가역 2번출구 뒤'},
+                {'parkingBikeTotCnt': 9, 'rackTotCnt': 24, 'shared': 15, 'stationName': '335. 종로3가역 15번출구 앞'},
+                {'parkingBikeTotCnt': 16, 'rackTotCnt': 44, 'shared': 28, 'stationName': '337. 창경궁 입구'},
+                {'parkingBikeTotCnt': 20, 'rackTotCnt': 49, 'shared': 29, 'stationName': '338. 세운스퀘어 앞'},
+                {'parkingBikeTotCnt': 19, 'rackTotCnt': 30, 'shared': 11, 'stationName': '339. 종로4가 사거리'},
+                {'parkingBikeTotCnt': 11, 'rackTotCnt': 21, 'shared': 10, 'stationName': '340. 혜화동 로터리'},
+                {'parkingBikeTotCnt': 2, 'rackTotCnt': 29, 'shared': 27, 'stationName': '341. 혜화역 3번출구 뒤'},
+                {'parkingBikeTotCnt': 31, 'rackTotCnt': 38, 'shared': 7, 'stationName': '342. 대학로 마로니에공원'},
+                {'parkingBikeTotCnt': 5, 'rackTotCnt': 25, 'shared': 20, 'stationName': '343. 예일빌딩(율곡로) 앞'},
+                {'parkingBikeTotCnt': 24, 'rackTotCnt': 28, 'shared': 4, 'stationName': '344. 성균관대 E하우스 앞'},
+                {'parkingBikeTotCnt': 13, 'rackTotCnt': 24, 'shared': 11, 'stationName': '345. 서울보증보험본사 앞'},
+                {'parkingBikeTotCnt': 22, 'rackTotCnt': 22, 'shared': 0, 'stationName': '348. 독립문역 사거리'}
+            ];
+
+
+
+        }
+
+    </script>
+</head>
+
+<body>
+<h1>jQuery +Ajax의 조합을 연습하자!</h1>
+
+<hr />
+
+<div class="question-box">
+    <h2>2. 서울시 OpenAPI(실시간 따릉이 현황)를 이용하기</h2>
+    <p>모든 위치의 따릉이 현황을 보여주세요</p>
+    <p>업데이트 버튼을 누를 때마다 지웠다 새로 씌여져야 합니다.</p>
+    <button onclick="q1()">업데이트</button>
+    <table>
+        <thead>
+        <tr>
+            <td>거치대 위치</td>
+            <td>거치대 수</td>
+            <td>현재 거치된 따릉이 수</td>
+        </tr>
+        </thead>
+        <tbody id="names-q1">
+
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

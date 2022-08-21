@@ -93,4 +93,7 @@ public class CrudController {
         crudService.delete(bno);
         return "redirect:/list";
     }
+
+    @GetMapping("/ajax")
+    public void ajax(){}
 }
