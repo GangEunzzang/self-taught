@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @Setter
 @Getter
 @Entity
-public class History {
+public   class History {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

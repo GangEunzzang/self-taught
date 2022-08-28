@@ -5,6 +5,8 @@ import lombok.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Getter
@@ -108,5 +110,27 @@ public class CooconDataDTO {
         ModelMapper modelMapper = new ModelMapper();
         CooconDataDTO cooconDataDTO = modelMapper.map(entity, CooconDataDTO.class);
         return cooconDataDTO;
+    }
+
+    public static List<CooconDataDTO> readDataToDTO(List<String> fileTotalReadLine) {
+
+        List<CooconDataDTO> cooconDataDTOList = new ArrayList<>();
+
+        for(int i=0; i< fileTotalReadLine.size(); i++) {
+            String[] conversionData = fileTotalReadLine.get(i).split("\\|"); //파이프라인 제거
+
+            CooconDataDTO cooconDataDTO = CooconDataDTO.builder()
+                    .companyRegisterNum(conversionData[1]).franchiseeName(conversionData[2])
+                    .largeSectorsCode(conversionData[3]).largeSectorsName(conversionData[4])
+                    .mediumSectorsCode(conversionData[5]).mediumSectorsName(conversionData[6])
+                    .smallSectorsCode(conversionData[7]).smallSectorsName(conversionData[8])
+                    .franchiseeAddress(conversionData[9]).postalCode(conversionData[10])
+                    .updateDate(conversionData[11]).franchiseeInfoStatus(conversionData[12])
+                    .franchiseeInfoDivision(conversionData[13]).closeDate(conversionData[14])
+                    .build();
+            cooconDataDTOList.add(cooconDataDTO);
+            System.out.println("리스트 분리 : " + cooconDataDTOList.get(i));
+        }
+        return cooconDataDTOList;
     }
 }

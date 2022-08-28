@@ -4,6 +4,9 @@ import gang.study.crud.file.domain.entity.ImportantData;
 import lombok.*;
 import org.modelmapper.ModelMapper;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -70,4 +73,26 @@ public class ImportantDataDTO {
         ImportantDataDTO importantData = modelMapper.map(entity, ImportantDataDTO.class);
         return importantData;
     }
+
+    /**
+     * @param rs - ResultSet > 조회한 결과들을 저장
+     * @return 조회한 결과를 DTO로 변환 (Coocon 전용)
+     * @throws SQLException
+     */
+    public static ImportantDataDTO CooconDataRefine(ResultSet rs) throws SQLException {
+        ImportantDataDTO coocon = ImportantDataDTO.builder()
+                .companyRegisterNum(rs.getString("company_register_num"))
+                .franchiseeName(rs.getString("franchisee_name"))
+                .franchiseeAddress(rs.getString("franchisee_address"))
+                .largeSectorsCode(rs.getString("large_sectors_code"))
+                .largeSectorsName(rs.getString("large_sectors_name"))
+                .postalCode("postal_code")
+                .updateDate("update_date")
+                .provider("Coocon")
+                .priority("1")
+                .build();
+        return coocon;
+    }
+
+
 }

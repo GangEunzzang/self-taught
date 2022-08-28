@@ -15,8 +15,5 @@ public class JdbcTemplateTest {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    @Over
-    public List<CooconData> selectAll() {
-        return jdbcTemplate.query("select * from coocon_data");
-    }
+
 }
