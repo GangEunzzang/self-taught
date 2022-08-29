@@ -25,7 +25,6 @@ public class FileTest {
 
 //        File file = new File("/Users/igang-eun/Desktop/coocon/INDUSTRY_ALL.20220814");
         File file = new File("/Users/igang-eun/Desktop/test.txt");
-
         FileInsert.fileRead(file);
 
         StopWatch stopWatch = new StopWatch();

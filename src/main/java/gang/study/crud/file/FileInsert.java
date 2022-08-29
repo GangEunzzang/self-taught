@@ -2,6 +2,8 @@ package gang.study.crud.file;
 
 import gang.study.crud.file.domain.entity.CooconData;
 import gang.study.crud.file.dto.CooconDataDTO;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang3.time.StopWatch;
 
 import java.io.*;
@@ -10,18 +12,18 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 public class FileInsert {
 
-    private File file;
-
     public static List<CooconDataDTO> fileRead(File file) throws IOException {
+        String line; // 파일에서의 한줄을 의미
         BufferedReader reader = new BufferedReader(new FileReader(file));
 
         System.out.println("파일명 : " + file.getName());
         System.out.println("파일 위치 : " + file.getPath());
         System.out.println("파일 사이즈 :" + file.length() + "byte");
 
-        String line;
 
         List<String> aLines = new ArrayList<String>();
 
