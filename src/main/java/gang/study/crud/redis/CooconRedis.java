@@ -1,31 +1,25 @@
-package gang.study.crud.file.domain.entity;
+package gang.study.crud.redis;
 
-import lombok.*;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.index.Indexed;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@AllArgsConstructor
-@NoArgsConstructor
+@RedisHash(value = "test", timeToLive = 50)
 @Getter
-@Setter
+@AllArgsConstructor
 @Builder
-@ToString
-@Entity
-public class CooconData {
-
+public class CooconRedis {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
+
 
     /**
      *   '사업자 등록번호'
      */
+    @Indexed // 필드 값으로 데이터 찾을 수 있게 하는 어노테이션(findByAccessToken)
     private String companyRegisterNum;
 
     /**
@@ -102,6 +96,5 @@ public class CooconData {
      *   '하위 가맹점 건수'
      */
     private String subFranchiseNum;
-
 
 }

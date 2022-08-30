@@ -2,8 +2,11 @@ package gang.study.crud;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
@@ -14,8 +17,6 @@ import java.sql.DriverManager;
 
 @Configuration
 public class Config {
-
-
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
@@ -28,19 +29,15 @@ public class Config {
         return new JPAQueryFactory(entityManager);
     }
 
+    @Value("${spring.redis.host}")
+    private String host;
+
+    @Value("${spring.redis.port}")
+    private int port;
     @Bean
-    public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUsername("root");
-        dataSource.setPassword("12345678");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/self");
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        return dataSource;
+    public RedisConnectionFactory redisConnectionFactory() {
+        return new LettuceConnectionFactory(host, port);
     }
 
-    @Bean
-    public JdbcTemplate jdbcTemplate() {
-        return new JdbcTemplate(dataSource());
-    }
 
 }

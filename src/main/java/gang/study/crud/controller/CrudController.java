@@ -96,4 +96,6 @@ public class CrudController {
 
     @GetMapping("/ajax")
     public void ajax(){}
+
+
 }
