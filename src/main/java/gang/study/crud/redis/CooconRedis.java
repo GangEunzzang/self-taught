@@ -15,7 +15,6 @@ public class CooconRedis {
     @Id
     private String id;
 
-
     /**
      *   '사업자 등록번호'
      */
