@@ -1,31 +1,29 @@
 package gang.study.crud.file;
 
+import gang.study.crud.file.domain.repository.CooconDataRepository;
 import gang.study.crud.file.dto.CooconDataDTO;
-import gang.study.crud.file.dto.ImportantDataDTO;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.time.StopWatch;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 
-import javax.sql.DataSource;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.sql.*;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+@RequiredArgsConstructor
 public class FileTest {
 
 
+    private final CooconDataRepository cooconDataRepository;
+
     public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException {
 
-//        File file = new File("/Users/igang-eun/Desktop/coocon/INDUSTRY_ALL.20220814");
-        File file = new File("/Users/igang-eun/Desktop/test.txt");
-        FileInsert.fileRead(file);
+        File file = new File("/Users/igang-eun/Desktop/coocon/INDUSTRY_MOD.20220814");
+//        File file = new File("/Users/igang-eun/Desktop/test.txt");
+        List<CooconDataDTO> cooconDataDTOList = FileInsert.fileRead(file);
 
         StopWatch stopWatch = new StopWatch();
 
@@ -33,14 +31,14 @@ public class FileTest {
 
         String start = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yy-MM-dd hh:mm:ss"));
         // ***********************************************************
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        String url = "jdbc:mysql://localhost:3306/self";
-        String id = "root";
-        String pw = "12345678";
-
-        Connection con = DriverManager.getConnection(url,id,pw);
-
-        PreparedStatement stmt = null;
+//        Class.forName("com.mysql.cj.jdbc.Driver");
+//        String url = "jdbc:mysql://localhost:3306/self";
+//        String id = "root";
+//        String pw = "12345678";
+//
+//        Connection con = DriverManager.getConnection(url,id,pw);
+//
+//        PreparedStatement stmt = null;
 //        con.setAutoCommit(false);
 //
 //        String sql = "insert into coocon_data " +
@@ -89,31 +87,32 @@ public class FileTest {
 //        con.commit() ;
 
 
-        String selectSql = "select company_register_num,  " +
-                "franchisee_name, large_sectors_code, " +
-                "large_sectors_name, franchisee_address, " +
-                "postal_code, update_date " +
-                "from coocon_data" ;
-
-        ResultSet rs;
-
-        stmt = con.prepareStatement(selectSql);
-        rs = stmt.executeQuery(selectSql); // 여기에 담긴다
-
-        List<ImportantDataDTO> importantDataDTOList = new ArrayList<>();
-
-        while (rs.next()) {
-            ImportantDataDTO coocon = ImportantDataDTO.CooconDataRefine(rs);
-            importantDataDTOList.add(coocon);
-        }
-
-        for(int i = 1; i<importantDataDTOList.size(); i++){
-            System.out.println("변환 데이터는 : " + importantDataDTOList.get(i));
-        }
-        System.out.println("크기는 : " + importantDataDTOList.size());
-
-        stmt.close();
+//        String selectSql = "select company_register_num,  " +
+//                "franchisee_name, large_sectors_code, " +
+//                "large_sectors_name, franchisee_address, " +
+//                "postal_code, update_date " +
+//                "from coocon_data" ;
+//
+//        ResultSet rs;
+//
+//        stmt = con.prepareStatement(selectSql);
+//        rs = stmt.executeQuery(selectSql); // 여기에 담긴다
+//
+//        List<ImportantDataDTO> importantDataDTOList = new ArrayList<>();
+//
+//        while (rs.next()) {
+//            ImportantDataDTO coocon = ImportantDataDTO.CooconDataRefine(rs);
+//            importantDataDTOList.add(coocon);
+//        }
+//
+//        for(int i = 1; i<importantDataDTOList.size(); i++){
+//            System.out.println("변환 데이터는 : " + importantDataDTOList.get(i));
+//        }
+//        System.out.println("크기는 : " + importantDataDTOList.size());
+//
+//        stmt.close();
         stopWatch.stop();
+
 
         String end = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yy-MM-dd hh:mm:ss"));
 

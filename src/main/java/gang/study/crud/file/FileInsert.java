@@ -1,14 +1,13 @@
 package gang.study.crud.file;
 
-import gang.study.crud.file.domain.entity.CooconData;
 import gang.study.crud.file.dto.CooconDataDTO;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.commons.lang3.time.StopWatch;
 
-import java.io.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +25,7 @@ public class FileInsert {
 
 
         List<String> aLines = new ArrayList<String>();
+
 
         // 이번줄의 내용이 있으면 읽어온다.
         while ((line = reader.readLine()) != null) {

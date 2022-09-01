@@ -5,7 +5,6 @@ import gang.study.crud.dto.PageRequestDTO;
 import gang.study.crud.dto.PageResultDTO;
 import gang.study.crud.entity.Crud;
 import gang.study.crud.entity.CrudReply;
-
 import gang.study.crud.exception.ErrorCode;
 import gang.study.crud.exception.board.BoardException;
 import gang.study.crud.repository.CrudReplyRepository;
@@ -14,16 +13,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import org.springframework.data.domain.Pageable;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Service
 @Log4j2

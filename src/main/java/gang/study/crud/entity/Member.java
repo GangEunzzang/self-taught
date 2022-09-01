@@ -5,7 +5,10 @@ import gang.study.crud.dto.MemberDTO;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
 
 @Getter
 @Setter

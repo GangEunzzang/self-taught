@@ -2,7 +2,6 @@ package gang.study.crud.file.domain.repository.querydsl;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import gang.study.crud.file.domain.entity.CooconData;
-import gang.study.crud.file.domain.entity.QCooconData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

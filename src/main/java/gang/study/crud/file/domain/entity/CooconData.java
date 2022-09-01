@@ -1,9 +1,6 @@
 package gang.study.crud.file.domain.entity;
 
 import lombok.*;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisHash;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

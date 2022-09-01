@@ -1,6 +1,5 @@
 package gang.study.crud.service;
 
-import gang.study.crud.dto.CrudDTO;
 import gang.study.crud.dto.CrudReplyDTO;
 import gang.study.crud.entity.Crud;
 import gang.study.crud.entity.CrudReply;

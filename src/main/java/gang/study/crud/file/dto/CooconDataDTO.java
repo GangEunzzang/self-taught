@@ -3,11 +3,10 @@ package gang.study.crud.file.dto;
 import gang.study.crud.file.domain.entity.CooconData;
 import lombok.*;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.IntStream;
 
 @Getter
 @Setter
@@ -116,9 +115,8 @@ public class CooconDataDTO {
 
         List<CooconDataDTO> cooconDataDTOList = new ArrayList<>();
 
-        for(int i=0; i< fileTotalReadLine.size(); i++) {
+        IntStream.range(0, fileTotalReadLine.size()).forEachOrdered(i -> {
             String[] conversionData = fileTotalReadLine.get(i).split("\\|"); //파이프라인 제거
-
             CooconDataDTO cooconDataDTO = CooconDataDTO.builder()
                     .companyRegisterNum(conversionData[1]).franchiseeName(conversionData[2])
                     .largeSectorsCode(conversionData[3]).largeSectorsName(conversionData[4])
@@ -130,7 +128,7 @@ public class CooconDataDTO {
                     .build();
             cooconDataDTOList.add(cooconDataDTO);
             System.out.println("리스트 분리 : " + cooconDataDTOList.get(i));
-        }
+        });
         return cooconDataDTOList;
     }
 }

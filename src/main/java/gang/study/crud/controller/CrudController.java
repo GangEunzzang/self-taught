@@ -2,14 +2,10 @@ package gang.study.crud.controller;
 
 import gang.study.crud.dto.CrudDTO;
 import gang.study.crud.dto.PageRequestDTO;
-import gang.study.crud.entity.Crud;
-
 import gang.study.crud.security.details.MemberDetail;
 import gang.study.crud.service.CrudService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.awt.print.Pageable;
-import java.security.Principal;
-import java.util.List;
 
 @Controller
 @Log4j2

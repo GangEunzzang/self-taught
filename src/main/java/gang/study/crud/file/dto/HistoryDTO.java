@@ -28,17 +28,17 @@ public class HistoryDTO {
     private String fileSize;
 
     /**
-     * 작업 시작 시간
+     * @Description 작업 시작 시간
      */
     private String startTime;
 
     /**
-     * 작업 소요 시간
+     * @Description 작업 소요 시간
      */
     private String workTime;
 
     /**
-     * 작업 종료 사간
+     * @Description 작업 종료 사간
      */
     private String endTime;
 

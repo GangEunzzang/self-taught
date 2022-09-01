@@ -1,19 +1,14 @@
 package gang.study.crud.controller;
 
-import gang.study.crud.dto.CrudDTO;
 import gang.study.crud.dto.CrudReplyDTO;
-import gang.study.crud.entity.CrudReply;
 import gang.study.crud.file.domain.repository.querydsl.CooconQueryRepository;
 import gang.study.crud.service.CrudReplyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
-import java.security.Principal;
 import java.util.List;
 
 @Log4j2

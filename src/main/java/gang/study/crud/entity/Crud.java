@@ -1,7 +1,6 @@
 package gang.study.crud.entity;
 
 import lombok.*;
-import org.mapstruct.Mapper;
 
 import javax.persistence.*;
 

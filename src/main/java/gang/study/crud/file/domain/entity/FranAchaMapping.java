@@ -1,7 +1,6 @@
 package gang.study.crud.file.domain.entity;
 
 import lombok.*;
-import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 
@@ -26,4 +25,10 @@ public class FranAchaMapping {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "basic_category_id")
     public BasicCategory basicCategory;
+
+    public String largeSectorsCode;
+
+    public String mediumSectorsCode;
+
+    public String smallSectorsCode;
 }
