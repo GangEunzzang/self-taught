@@ -1,5 +1,6 @@
 package gang.study.crud.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,7 +22,13 @@ public class CrudReply {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @JsonIgnore
     private Crud crud;
+
+    public void setCrud(Crud crud) {
+        this.crud = crud;
+    }
 
 
 }
