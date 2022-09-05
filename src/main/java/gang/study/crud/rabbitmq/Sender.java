@@ -18,5 +18,6 @@ class Sender {
 
     public void send(String message) {
         template.convertAndSend("TestQ", message);
+        template.convertAndSend("TestQ", message);
     }
 }
