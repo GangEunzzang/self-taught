@@ -43,7 +43,7 @@ public class CrudServiceImpl implements CrudService {
 //                .map(s -> entityToDTO(s))
 //                .collect(Collectors.toList());
 //    }
-
+    
     @Override
     public PageResultDTO<CrudDTO, Crud> getList(PageRequestDTO requestDTO) {
         log.info(requestDTO);
@@ -51,7 +51,7 @@ public class CrudServiceImpl implements CrudService {
         Pageable pageable = requestDTO.getPageable(Sort.by("bno").descending());
         Page<Crud> result = crudRepository.findAll(pageable);
 
-        Function<Crud, CrudDTO> fn = (entity -> entityToDTO(entity));
+        Function<Crud, CrudDTO> fn = (this::entityToDTO);
 
         return new PageResultDTO<>(result, fn);
     }

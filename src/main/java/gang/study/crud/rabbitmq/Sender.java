@@ -11,13 +11,12 @@ class Sender {
     @Autowired
     RabbitMessagingTemplate template;
 
-    @Bean
-    Queue queue() {
-        return new Queue("TestQ", false);
-    }
+//    @Bean
+//    Queue queue() {
+//        return new Queue("TestQ", false);
+//    }
 
     public void send(String message) {
-        template.convertAndSend("TestQ", message);
         template.convertAndSend("TestQ", message);
     }
 }

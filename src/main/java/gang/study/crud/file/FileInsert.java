@@ -23,7 +23,6 @@ public class FileInsert {
         System.out.println("파일 위치 : " + file.getPath());
         System.out.println("파일 사이즈 :" + file.length() + "byte");
 
-
         List<String> aLines = new ArrayList<String>();
 
 

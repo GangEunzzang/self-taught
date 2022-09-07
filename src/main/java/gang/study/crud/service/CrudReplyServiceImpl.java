@@ -23,8 +23,7 @@ public class CrudReplyServiceImpl implements CrudReplyService{
 
         List<CrudReply> result = crudReplyRepository.findByCrud(crud);
 
-        return result.stream().map(crudReply ->
-                entityToDTO(crudReply)).collect(Collectors.toList());
+        return result.stream().map(this::entityToDTO).collect(Collectors.toList());
     }
 
     @Override
