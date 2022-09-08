@@ -9,5 +9,8 @@ public class Listener {
     @RabbitListener(queues = "TestQ")
     public void processMessage(String content) {
         System.out.println(content);
+        System.out.println("테스트");
+
     }
+
 }
