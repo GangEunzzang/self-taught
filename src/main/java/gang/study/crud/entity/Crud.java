@@ -19,7 +19,7 @@ public class Crud {
     @Column(length = 50, nullable = false)
     public String title;
 
-    @Column(length = 1000, nullable = true)
+    @Column(length = 1000, nullable = false)
     public String content;
 
 
