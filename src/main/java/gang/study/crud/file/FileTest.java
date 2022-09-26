@@ -119,6 +119,7 @@ public class FileTest {
         System.out.println("작업 시작 시간 : " + start);
         System.out.println("작업 소요 시간 : " + stopWatch.getTime(TimeUnit.SECONDS) + "초");
         System.out.println("작업 종료 시간 : " + end);
+        System.out.println("작업 종료 시간 : " + end);
     }
 
 
