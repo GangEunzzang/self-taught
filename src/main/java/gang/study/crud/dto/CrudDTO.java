@@ -19,6 +19,7 @@ public class CrudDTO {
     @NotBlank(message = "내용을 입력해주세요.")
     private String content;
 
+    @NotBlank(message = "작성자 정보가 없습니다.")
     private String writer;
 
     private List<CrudReplyDTO> crudReplyDTOList = new ArrayList<>();

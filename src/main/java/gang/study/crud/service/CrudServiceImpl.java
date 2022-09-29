@@ -70,6 +70,7 @@ public class CrudServiceImpl implements CrudService {
             throw new BoardException("게시물이 없습니다",ErrorCode.NOT_FOUND);
         };
 
+
         Crud crud = Crud.builder().bno(bno).build();
         Crud result = crudRepository.findByBno(bno);
 
