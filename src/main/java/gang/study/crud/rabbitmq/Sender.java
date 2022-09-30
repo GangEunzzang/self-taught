@@ -19,4 +19,8 @@ class Sender {
     public void send(String message) {
         template.convertAndSend("TestQ", message);
     }
+
+    public void send2(String message) {
+        template.convertAndSend("redirect", message);
+    }
 }
