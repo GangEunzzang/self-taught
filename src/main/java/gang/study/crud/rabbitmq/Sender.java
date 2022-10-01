@@ -23,4 +23,8 @@ class Sender {
     public void send2(String message) {
         template.convertAndSend("redirect", message);
     }
+
+    public void send3(String message) {
+        template.convertAndSend("redis", message);
+    }
 }
