@@ -1,5 +1,6 @@
 package gang.study.crud.service;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -8,6 +9,10 @@ import java.util.stream.IntStream;
 @SpringBootTest
 public class JavaTests {
 
+    @BeforeEach
+    public void test() {
+        
+    }
     @Test
     public void 테스트_스트림 () throws Exception {
         //given
