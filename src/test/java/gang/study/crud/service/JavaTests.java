@@ -11,7 +11,7 @@ public class JavaTests {
 
     @BeforeEach
     public void test() {
-        
+
     }
     @Test
     public void 테스트_스트림 () throws Exception {
